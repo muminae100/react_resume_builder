@@ -1,5 +1,9 @@
+import styled from "styled-components";
 import { useStateValue } from '../StateProvider';
 import { BsCheck } from 'react-icons/bs';
+import { FaPaintBrush } from "react-icons/fa";
+import { BsFillMoonFill } from "react-icons/bs";
+import { BsFillSunFill } from "react-icons/bs";
 
 const themeColors = [
     {
@@ -28,60 +32,40 @@ const themeColors = [
     },
 ];
 
+const IconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.currentColor || ""};
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin: 10px;
+  padding: 15px;
+  border-radius: 50%;
+`;
+
 const ThemeSettings = () => {
-  const { setColor, setMode, currentMode, currentColor, setThemeSettings } = useStateValue();
+  const { setColor, setMode, currentMode, currentColor, setThemeSettings, themeSettings } = useStateValue();
 
   return (
+        <>        
+        {themeSettings &&(
         <>
-          <div>
-            <input
-              type="radio"
-              id="light"
-              name="theme"
-              value="Light"
-              className="cursor-pointer"
-              onChange={setMode}
-              checked={currentMode === 'Light'}
-            />
-            <label>
-              Light
-            </label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="dark"
-              name="theme"
-              value="Dark"
-              onChange={setMode}
-              className="cursor-pointer"
-              checked={currentMode === 'Dark'}
-            />
-            <label htmlFor="dark">
-              Dark
-            </label>
-          </div>
-       
-        <div>
-          <p>Theme Colors</p>
-          <div>
-            {themeColors.map((item, index) => (
-              
-                <div
-                  key={item.name}
-                >
-                  <button
-                    type="button"
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => setColor(item.color)}
-                  >
-                    <BsCheck className={` ${item.color === currentColor ? 'block' : 'hidden'}`} />
-                  </button>
-                </div>
-              
-            ))}
-          </div>
-        </div>
+        {themeColors.map((item, index) => ( 
+            <IconWrapper currentColor={item.color} key={index} onClick={() => setColor(item.color)} >        
+            <BsCheck style={{"display": `${item.color === currentColor ? 'block' : 'hidden'}`, "color":"white"}} />
+            </IconWrapper>
+        ))}
+        </>
+        )}
+
+            <IconWrapper currentColor={currentColor} onClick={() => setThemeSettings(!themeSettings)}>
+            <FaPaintBrush style={{"color": "white"}} />
+            </IconWrapper>
+            <IconWrapper currentColor={currentColor}>
+            {currentMode === 'Light' ? <BsFillSunFill onClick={() =>setMode("Dark")} style={{"color": "white"}}/> : <BsFillMoonFill onClick={() =>setMode("Light")} style={{"color": "white"}}/>}
+            </IconWrapper>
+          
         </>
       
   );

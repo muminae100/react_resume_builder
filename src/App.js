@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 
 const AppWrapper = styled.div`
   width: 100%;
+  height: 100vh;
   background: ${props => props.currentMode === "Dark" ? "#20232A" : "white"};
   color: ${props => props.currentMode === "Dark" ? "#f1f1f1" : "#333"};
 `;

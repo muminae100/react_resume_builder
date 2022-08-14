@@ -8,15 +8,18 @@ const NavBarWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  position: sticky;
-  top: 0;
 `;
 
 const Title = styled.h1`
-  padding: 0.5em;
-  font-size: 1.5em;
+  padding: 5px;
+  font-size: 2em;
+  margin-left: 20px;
   font-family: 'Roboto', sans-serif;
   color: ${props => props.currentMode === "Dark" ? "white" : props.currentColor};
+
+  @media (max-width: 425px) {
+    font-size: 1.5em;
+  }
 `;
 
 const Navbar = () => {

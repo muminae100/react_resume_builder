@@ -8,9 +8,9 @@ export const StateProvider = ({reducer, initialState, children }) => {
     const [themeSettings, setThemeSettings] = useState(false);
     const [activeMenu, setActiveMenu] = useState(true);
   
-    const setMode = (e) => {
-      setCurrentMode(e.target.value);
-      localStorage.setItem('themeMode', e.target.value);
+    const setMode = (mode) => {
+      setCurrentMode(mode);
+      localStorage.setItem('themeMode', mode);
     };
   
     const setColor = (color) => {
