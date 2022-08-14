@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import ThemeSettings from "../components/ThemeSettings";
 import { useStateValue } from "../StateProvider";
 import { motion } from "framer-motion";
+import Templates from "../components/Templates";
 
 const HomeContentWrapper = styled.div`
   width: 100%;
@@ -24,7 +25,7 @@ const SubTitle = styled.h2`
   width: 60%;
   font-size: 2.5em;
   font-family: 'Roboto', sans-serif;
-  color: ${props => props.currentMode === "Dark" ? "white" : props.currentColor};
+  font-weight: bold;
 
   @media (max-width: 425px) {
     font-size: 1.5em;
@@ -47,19 +48,19 @@ const Home = () => {
             <SubTitle>Create a Job-winning resume. Stand out and get hired faster with field-tested resume templates.</SubTitle>
             </motion.div>
 
-            <motion.div
+            <Button  
+            as={motion.button}
             whileInView={{ y: [100, 0], opacity: [0, 1] }}
             whileHover={{
               scale: 1.2,
               transition: { duration: 0.3 },
             }}
-            whileTap={{ scale: 0.9 }} 
-            >
-            <Button  
+            whileTap={{ scale: 0.9 }}
             currentColor={currentColor}
             >Create My Resume
             </Button>
-            </motion.div>
+          
+            <Templates />
 
             <SettingsContentWrapper>
             <ThemeSettings />
