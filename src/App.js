@@ -1,27 +1,47 @@
-import styled,  { css } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components';
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from "./pages/Home";
+import { useStateValue } from './StateProvider';
+import Navbar from "./components/Navbar";
 
-const Button = styled.button`
-background: transparent;
-border-radius: 3px;
-border: 2px solid palevioletred;
-color: palevioletred;
-margin: 0 1rem;
-padding: 0.25rem 1rem;
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+`;
 
-${props =>
-  props.primary &&
-  css`
-    background: palevioletred;
-    color: white;
-  `};
-
+const AppWrapper = styled.div`
+  width: 100%;
+  background: ${props => props.currentMode === "Dark" ? "#20232A" : "white"};
+  color: ${props => props.currentMode === "Dark" ? "#f1f1f1" : "#333"};
 `;
 
 const App = () => {
+  const { setCurrentColor, setCurrentMode, currentMode } = useStateValue();
+
+  useEffect(() => {
+    const currentThemeColor = localStorage.getItem('colorMode');
+    const currentThemeMode = localStorage.getItem('themeMode');
+    if (currentThemeColor && currentThemeMode) {
+      setCurrentColor(currentThemeColor);
+      setCurrentMode(currentThemeMode);
+    }
+  }, [setCurrentColor, setCurrentMode]);
+
   return (
-    <div>
-      <Button>Hello</Button>
-    </div>
+    <Router>
+      <GlobalStyle />
+      <AppWrapper currentMode={currentMode}>
+      <Navbar />
+      <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="*" element={<Home />}/>
+      </Routes>
+      </AppWrapper>
+    </Router>
   )
 }
 
