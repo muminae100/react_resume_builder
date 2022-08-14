@@ -4,6 +4,7 @@ import { BsCheck } from 'react-icons/bs';
 import { FaPaintBrush } from "react-icons/fa";
 import { BsFillMoonFill } from "react-icons/bs";
 import { BsFillSunFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const themeColors = [
     {
@@ -42,6 +43,7 @@ const IconWrapper = styled.div`
   margin: 10px;
   padding: 15px;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 const ThemeSettings = () => {
@@ -52,20 +54,45 @@ const ThemeSettings = () => {
         {themeSettings &&(
         <>
         {themeColors.map((item, index) => ( 
-            <IconWrapper currentColor={item.color} key={index} onClick={() => setColor(item.color)} >        
+          <motion.div
+          whileHover={{
+            scale: 1.2,
+            transition: { duration: 0.5 },
+          }}
+          whileTap={{ scale: 0.9 }}
+          key={index}
+          >
+            <IconWrapper currentColor={item.color}  onClick={() => setColor(item.color)} >        
             <BsCheck style={{"display": `${item.color === currentColor ? 'block' : 'hidden'}`, "color":"white"}} />
             </IconWrapper>
+          </motion.div>
         ))}
         </>
         )}
 
+        <motion.div
+          whileHover={{
+            scale: 1.2,
+            transition: { duration: 0.3 },
+          }}
+          whileTap={{ scale: 0.9 }}    
+          >
             <IconWrapper currentColor={currentColor} onClick={() => setThemeSettings(!themeSettings)}>
             <FaPaintBrush style={{"color": "white"}} />
             </IconWrapper>
+          </motion.div>
+
+          <motion.div
+          whileHover={{
+            scale: 1.2,
+            transition: { duration: 0.3 },
+          }}
+          whileTap={{ scale: 0.9 }}    
+          >
             <IconWrapper currentColor={currentColor}>
             {currentMode === 'Light' ? <BsFillSunFill onClick={() =>setMode("Dark")} style={{"color": "white"}}/> : <BsFillMoonFill onClick={() =>setMode("Light")} style={{"color": "white"}}/>}
             </IconWrapper>
-          
+          </motion.div>
         </>
       
   );

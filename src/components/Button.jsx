@@ -8,6 +8,7 @@ const Button = styled.button`
   margin: 0 1em;
   padding: 1em;
   font-family: 'Roboto', sans-serif;
+  cursor: pointer;
 
   &:hover {
     background: transparent;

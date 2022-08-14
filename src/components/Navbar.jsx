@@ -16,6 +16,7 @@ const Title = styled.h1`
   margin-left: 20px;
   font-family: 'Roboto', sans-serif;
   color: ${props => props.currentMode === "Dark" ? "white" : props.currentColor};
+  cursor: pointer;
 
   @media (max-width: 425px) {
     font-size: 1.5em;

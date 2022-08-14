@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import ThemeSettings from "../components/ThemeSettings";
 import { useStateValue } from "../StateProvider";
+import { motion } from "framer-motion";
 
 const HomeContentWrapper = styled.div`
   width: 100%;
@@ -37,8 +38,28 @@ const Home = () => {
 
     return (
         <HomeContentWrapper>
+
+            <motion.div
+            whileInView={{ y: [100, 0], opacity: [0, 1] }} 
+            transition={{ duration: 1 }}
+            style={{"display": "flex", "justifyContent": "center"}}
+            >
             <SubTitle>Create a Job-winning resume. Stand out and get hired faster with field-tested resume templates.</SubTitle>
-            <Button currentColor={currentColor}>Create My Resume</Button>
+            </motion.div>
+
+            <motion.div
+            whileInView={{ y: [100, 0], opacity: [0, 1] }}
+            whileHover={{
+              scale: 1.2,
+              transition: { duration: 0.3 },
+            }}
+            whileTap={{ scale: 0.9 }} 
+            >
+            <Button  
+            currentColor={currentColor}
+            >Create My Resume
+            </Button>
+            </motion.div>
 
             <SettingsContentWrapper>
             <ThemeSettings />
